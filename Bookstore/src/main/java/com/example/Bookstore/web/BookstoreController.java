@@ -18,7 +18,7 @@ public class BookstoreController {
 	public String hello(Model model) {
 		Book iambook = new Book ("I am book", "Barak Obama", 2020, "123-ok222", 55);
 		model.addAttribute("newbook", iambook);
-		System.out.println("Hello GitHub!");
+		System.out.println("Hello");
 		return "page";
 	}
 
