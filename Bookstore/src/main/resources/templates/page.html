@@ -4,9 +4,33 @@
 <title>Server Programming</title>
 <meta http-equiv="Content-Type" content="text/html;
 charset=UTF-8" />
+<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/css/bootstrap.min.css}" />
 </head>
 <body>
-<h1>I am BookstoreApp</h1>
-<p th:text = "${newbook}"> </p>
+<h1>I am Book App</h1>
+
+<table class="table table-striped">
+<tbody>
+<tr>
+<th>Title </th>
+<th>Author </th>
+<th>Year </th>
+<th>Price </th>
+<th> ID </th>
+<th>Delete </th>
+<th>Edit </th>
+</tr>
+<tr th:each="book : ${books}">
+    <td th:text="${book.title}"> </td> 
+    <td th:text="${book.author}">  </td>
+    <td th:text="${book.year}">   </td>
+    <td th:text="${book.price}">  </td>
+    <td th:text="${book.id}">  </td>
+    <td> <a th:href ="@{/delete/{id}(id=${book.id})}" class="btn btn-danger">Delete</a></td>
+    <td> <a th:href ="@{/edit/{id}(id=${book.id})}">Edit</a></td>
+    </tr>
+</tbody>
+</table>
+<a href="/add" class="btn btn-success">Add a Book</a>
 </body>
 </html>

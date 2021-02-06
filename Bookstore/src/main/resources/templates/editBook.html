@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Server Programming</title>
+<meta http-equiv="Content-Type" content="text/html;
+charset=UTF-8" />
+</head>
+<body>
+<h1>Edit book</h1>
+<!-- Note! Id should be added otherwise new student is created -->
+
+<form th:object="${book}" th:action="@{../save}" action="#" method="post">
+<input type="hidden" th:field="*{id}" class="form-control"/>
+<label for="title">Title</label> <br>
+<input type="text" th:field="*{title}" /> <br><br>
+<label for="author">Author</label> <br>
+<input type="text" th:field="*{author}" /> <br><br>
+<label for="author">Year</label> <br>
+<input type="text" th:field="*{year}" /> <br><br>
+<label for="author">Price</label> <br>
+<input type="text" th:field="*{price}" /><br><br>
+<input type="submit" class="btn btn-success" value="Save"></input>
+</form>
+
+
+</body>
+</html>
