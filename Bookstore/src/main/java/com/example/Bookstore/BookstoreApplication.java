@@ -7,6 +7,8 @@ import org.springframework.context.annotation.Bean;
 
 import com.example.Bookstore.domain.Book;
 import com.example.Bookstore.domain.BookRepository;
+import com.example.Bookstore.domain.Category;
+import com.example.Bookstore.domain.CategoryRepository;
 
 @SpringBootApplication
 public class BookstoreApplication {
@@ -16,7 +18,7 @@ public class BookstoreApplication {
 	}
 
 	@Bean
-	public CommandLineRunner demo(BookRepository repository) {
+	public CommandLineRunner demo(BookRepository repository, CategoryRepository crepos) {
 	return (args) -> {
 	 
 		//String title, String author, long year, long price
@@ -26,6 +28,14 @@ public class BookstoreApplication {
 		repository.save(b);
 		repository.save(c);
 		repository.save(d);
+		
+		Category ab = new Category("Fiction");
+		Category ac = new Category("Science");
+		Category ad = new Category("Horror");
+		crepos.save(ab);
+		crepos.save(ac);
+		crepos.save(ad);
+		
 	};
 	}
 	

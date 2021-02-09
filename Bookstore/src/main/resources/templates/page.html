@@ -16,16 +16,17 @@ charset=UTF-8" />
 <th>Author </th>
 <th>Year </th>
 <th>Price </th>
-<th> ID </th>
+<th>Category</th>
 <th>Delete </th>
 <th>Edit </th>
+
 </tr>
 <tr th:each="book : ${books}">
     <td th:text="${book.title}"> </td> 
     <td th:text="${book.author}">  </td>
     <td th:text="${book.year}">   </td>
     <td th:text="${book.price}">  </td>
-    <td th:text="${book.id}">  </td>
+    <td th:text="${book.category}">  </td>
     <td> <a th:href ="@{/delete/{id}(id=${book.id})}" class="btn btn-danger">Delete</a></td>
     <td> <a th:href ="@{/edit/{id}(id=${book.id})}">Edit</a></td>
     </tr>

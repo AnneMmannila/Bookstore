@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.Bookstore.domain.Book;
 import com.example.Bookstore.domain.BookRepository;
+import com.example.Bookstore.domain.CategoryRepository;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,6 +20,9 @@ public class BookstoreController {
 
 	@Autowired
 	private BookRepository repos;
+	
+	@Autowired
+	private CategoryRepository crepos;
 	
 	@RequestMapping(value ={"/", "/bookstore"})
 	public String listOfBooks(Model model) {
@@ -37,6 +41,7 @@ public class BookstoreController {
     @RequestMapping(value = "/add")
     public String addBook(Model model){
      model.addAttribute("book", new Book());
+     model.addAttribute("categories", crepos.findAll());
      
      return "addBook";
     }
@@ -51,6 +56,8 @@ public class BookstoreController {
     public String editBook(@PathVariable("id") Long bookId, Model model){
     model.addAttribute("book", repos.findById(bookId));
     model.addAttribute("books", repos.findAll());
+    model.addAttribute("categories", crepos.findAll());
+    System.out.println(crepos.findAll());
     return "editBook";
     }
 
