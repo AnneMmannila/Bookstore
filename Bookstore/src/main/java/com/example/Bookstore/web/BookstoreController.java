@@ -7,6 +7,7 @@ import java.util.Optional;
 import java.util.concurrent.atomic.AtomicLong;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -33,6 +34,22 @@ public class BookstoreController {
 	@Autowired
 	private CategoryRepository crepos;
 	
+	
+	
+	@RequestMapping(value="/login")
+    public String login() {	
+        return "login";
+    }
+	
+	
+	    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
+	    public String deleteBook(@PathVariable("id") Long id, Model model) {
+	    	repos.deleteById(id);
+	        return "redirect:../bookstore";
+	    }  
+	 
+
+	
 	@RequestMapping(value ={"/", "/bookstore"})
 	public String listOfBooks(Model model) {
 		
@@ -41,25 +58,31 @@ public class BookstoreController {
 		return "page";
 	}
 	
-	// RESTful service to get all students
+	
+	
+	@RequestMapping(value="/bookstore", method = RequestMethod.GET)
+	public String bookList(Model model) {
+	 model.addAttribute("books", repos.findAll());
+	 return "page";
+	}
+
+	/*
+	
+	// RESTful service to get all books
     @RequestMapping(value="/bookstore", method = RequestMethod.GET)
     public @ResponseBody List<Book> booksRest() {	
         return (List<Book>) repos.findAll();
-    }    
+    }  
+    
 
-	// RESTful service to get student by id
+	// RESTful service to get book by id
     @RequestMapping(value="/book/{id}", method = RequestMethod.GET)
-    public @ResponseBody Optional<Book> findStudentRest(@PathVariable("id") Long bookId) {	
+    public @ResponseBody Optional<Book> findBookRest(@PathVariable("id") Long bookId) {	
     	return repos.findById(bookId);
     }  
+*/	
 	
-	
-    @RequestMapping(value = "/delete/{id}")
-	public String deleteBook(@PathVariable("id") Long id, Model model) {
-	 repos.deleteById(id);
-	 return "redirect:../bookstore";
-	}
-	
+
     @RequestMapping(value = "/add")
     public String addBook(Model model){
      model.addAttribute("book", new Book());
@@ -73,6 +96,7 @@ public class BookstoreController {
      repos.save(book);
      return "redirect:bookstore";
     }
+    
     
     @RequestMapping(value = "/edit/{id}")
     public String editBook(@PathVariable("id") Long bookId, Model model){
