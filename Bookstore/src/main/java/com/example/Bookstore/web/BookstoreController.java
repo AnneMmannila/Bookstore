@@ -59,12 +59,6 @@ public class BookstoreController {
 	}
 	
 	
-	
-	@RequestMapping(value="/bookstore", method = RequestMethod.GET)
-	public String bookList(Model model) {
-	 model.addAttribute("books", repos.findAll());
-	 return "page";
-	}
 
 	/*
 	
@@ -97,7 +91,7 @@ public class BookstoreController {
      return "redirect:bookstore";
     }
     
-    
+    @PreAuthorize("hasAuthority('ADMIN')")
     @RequestMapping(value = "/edit/{id}")
     public String editBook(@PathVariable("id") Long bookId, Model model){
     model.addAttribute("book", repos.findById(bookId));
