@@ -41,7 +41,7 @@ public class BookstoreController {
         return "login";
     }
 	
-	
+		@PreAuthorize("hasAuthority('ADMIN')")
 	    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
 	    public String deleteBook(@PathVariable("id") Long id, Model model) {
 	    	repos.deleteById(id);
@@ -91,7 +91,7 @@ public class BookstoreController {
      return "redirect:bookstore";
     }
     
-    @PreAuthorize("hasAuthority('ADMIN')")
+    
     @RequestMapping(value = "/edit/{id}")
     public String editBook(@PathVariable("id") Long bookId, Model model){
     model.addAttribute("book", repos.findById(bookId));
